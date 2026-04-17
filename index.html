@@ -1,272 +1,177 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ELSA GETUP | The Bedrock Architect</title>
-    <!-- Premium Fonts -->
+    <title>ELSA GETUP | Bedrock Proxy Architect</title>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;400;700;900&family=Fira+Code:wght@300;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --frost-bg: #030712;
+            --frost-bg: #020617;
             --ice-blue: #0ea5e9;
             --crystal-white: #f8fafc;
-            --shadow-depth: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            --glass-bg: rgba(15, 23, 42, 0.8);
+            --glass-bg: rgba(15, 23, 42, 0.9);
+            --border: rgba(255, 255, 255, 0.1);
             --accent-gradient: linear-gradient(135deg, #0ea5e9 0%, #38bdf8 50%, #7dd3fc 100%);
-            --error-glow: 0 0 20px rgba(239, 68, 68, 0.4);
+            --error-red: #ef4444;
         }
 
-        * {
-            box-sizing: border-box;
-            scroll-behavior: smooth;
-        }
+        * { box-sizing: border-box; scroll-behavior: smooth; }
 
         body {
             background-color: var(--frost-bg);
             background-image: 
-                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.15) 0, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.1) 0, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.05) 0, transparent 50%);
             color: var(--crystal-white);
             font-family: 'Outfit', sans-serif;
             margin: 0;
-            line-height: 1.7;
-            overflow-x: hidden;
+            line-height: 1.8;
         }
 
-        /* Hero Section */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        .container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+
+        /* Hero UI */
+        header {
             text-align: center;
-            padding: 0 20px;
+            padding: 100px 0;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            border-radius: 0 0 50px 50px;
+            margin-bottom: 80px;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 6rem);
+        h1 {
+            font-size: clamp(3.5rem, 8vw, 5.5rem);
             font-weight: 900;
             margin: 0;
-            letter-spacing: -2px;
             background: var(--accent-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 10px 30px rgba(14, 165, 233, 0.3);
+            letter-spacing: -3px;
         }
 
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 600px;
-            opacity: 0.8;
-            margin-top: 20px;
-            font-weight: 300;
-        }
+        .brand-subtitle { font-size: 1.2rem; opacity: 0.6; letter-spacing: 4px; text-transform: uppercase; margin-top: 10px; }
 
-        /* Layout Container */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* Section Styling */
-        section {
-            margin-bottom: 120px;
-            animation: fadeIn 1s ease-out;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        h2::after {
-            content: "";
-            height: 2px;
-            flex-grow: 1;
-            background: linear-gradient(to right, var(--ice-blue), transparent);
-        }
-
-        /* Cards and Content */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-        }
+        /* Documentation Style */
+        section { margin-bottom: 100px; }
+        h2 { font-size: 2.2rem; border-left: 5px solid var(--ice-blue); padding-left: 20px; margin-bottom: 40px; }
 
         .card {
             background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--border);
             padding: 40px;
             border-radius: 30px;
-            box-shadow: var(--shadow-depth);
+            margin-bottom: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             position: relative;
-            overflow: hidden;
         }
 
-        .card::before {
-            content: "";
-            position: absolute;
-            top: 0; left: 0; width: 4px; height: 100%;
-            background: var(--accent-gradient);
-        }
+        .card h3 { color: var(--ice-blue); margin-top: 0; font-size: 1.6rem; }
 
-        .card h3 {
-            font-size: 1.5rem;
-            margin-top: 0;
-            color: var(--ice-blue);
-        }
+        .explanation { color: #94a3b8; font-size: 1rem; margin-bottom: 25px; }
+        .highlight { color: var(--crystal-white); font-weight: 600; }
 
-        /* The Explanation Briefs */
-        .brief {
-            font-size: 0.95rem;
-            color: #94a3b8;
-            margin-bottom: 25px;
-        }
+        /* The Mistake Table */
+        .mistake-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        @media (max-width: 800px) { .mistake-grid { grid-template-columns: 1fr; } }
 
-        .brief b {
-            color: var(--crystal-white);
+        .mistake-box {
+            background: rgba(239, 68, 68, 0.05);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 25px;
+            border-radius: 20px;
         }
+        .mistake-box h4 { color: var(--error-red); margin: 0 0 10px 0; }
 
-        /* Command Engine */
-        .code-engine {
+        /* Code Block Engine */
+        .code-block {
             background: #000;
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px;
             position: relative;
             border: 1px solid #1e293b;
+            margin: 20px 0;
         }
 
-        .code-engine pre {
-            margin: 0;
-            overflow-x: auto;
-        }
-
-        code {
-            font-family: 'Fira Code', monospace;
-            font-size: 0.9rem;
-            color: #38bdf8;
-        }
+        pre { margin: 0; overflow-x: auto; }
+        code { font-family: 'Fira Code', monospace; color: #38bdf8; font-size: 0.95rem; }
 
         .copy-btn {
-            position: absolute;
-            top: 15px; right: 15px;
-            background: rgba(14, 165, 233, 0.2);
-            border: 1px solid var(--ice-blue);
-            color: var(--ice-blue);
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.75rem;
-            transition: 0.3s;
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(14, 165, 233, 0.2); border: 1px solid var(--ice-blue);
+            color: var(--ice-blue); padding: 8px 18px; border-radius: 8px;
+            cursor: pointer; font-weight: 700; transition: 0.3s;
         }
+        .copy-btn:hover { background: var(--ice-blue); color: white; }
 
-        .copy-btn:hover {
-            background: var(--ice-blue);
-            color: white;
-        }
-
-        /* Diagnostics & Mistakes Section */
-        .mistake-log {
-            border-left: 2px dashed rgba(239, 68, 68, 0.5);
-            padding-left: 30px;
-            margin-left: 10px;
-        }
-
-        .log-item {
-            margin-bottom: 40px;
-            position: relative;
-        }
-
-        .log-item::before {
-            content: "!";
-            position: absolute;
-            left: -42px;
-            top: 0;
-            width: 24px; height: 24px;
-            background: #ef4444;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center; justify-content: center;
-            font-weight: 900;
-            font-size: 14px;
-            box-shadow: var(--error-glow);
+        /* Future Roadmap */
+        .roadmap { border-left: 2px solid var(--ice-blue); padding-left: 30px; margin-left: 15px; }
+        .roadmap-item { margin-bottom: 40px; position: relative; }
+        .roadmap-item::before {
+            content: ""; position: absolute; left: -37px; top: 10px;
+            width: 12px; height: 12px; background: var(--ice-blue); border-radius: 50%;
         }
 
         /* Footer */
         footer {
-            background: rgba(2, 6, 23, 0.95);
-            padding: 60px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            background: #010409; padding: 80px 20px; text-align: center;
+            border-top: 1px solid var(--border);
         }
+        .footer-logo { font-weight: 900; font-size: 1.8rem; margin-bottom: 10px; }
 
-        .footer-brand {
-            font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Responsiveness */
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 3rem; }
-            .grid { grid-template-columns: 1fr; }
-        }
     </style>
 </head>
 <body>
 
-    <div class="hero">
+    <header>
         <h1>ELSA GETUP</h1>
-        <p>A premium development journal documenting the journey of Bedrock architecture, proxy mastery, and the technical correction of every error.</p>
-    </div>
+        <div class="brand-subtitle">The Bedrock Architect Portal</div>
+    </header>
 
     <div class="container">
 
-        <!-- Phase 1: Mistakes & Solutions -->
+        <section id="summary">
+            <h2>Executive Summary</h2>
+            <div class="card">
+                <p class="explanation">
+                    The <span class="highlight">BedrockTool Project</span> is an advanced man-in-the-middle proxy system. It allows developers to capture world data from remote Minecraft servers by intercepting network packets. This guide documents the transition from standard usage to <span class="highlight">Advanced Termux Deployment</span>.
+                </p>
+            </div>
+        </section>
+
         <section id="mistakes">
-            <h2>Architecture Failures & Lessons</h2>
-            <div class="mistake-log">
-                <div class="log-item">
-                    <h3>Mistake: Local Source Compilation</h3>
-                    <p class="brief"><b>The Failure:</b> We initially attempted to compile the Go source code directly within the Termux environment. <b>The Result:</b> Fatal errors regarding Vulkan headers and Mesa drivers. <b>The Lesson:</b> Android's hardware abstraction layer does not support standard X11/Vulkan headers in a terminal. We must use pre-compiled ARM64 binaries to bypass the graphics dependency.</p>
+            <h2>The Architecture of Failure</h2>
+            <p class="explanation">Every advanced setup starts with mistakes. Here is how we turned fatal errors into technical mastery.</p>
+            <div class="mistake-grid">
+                <div class="mistake-box">
+                    <h4>The Compilation Error</h4>
+                    <p class="explanation">We attempted to build the <code>Go</code> source code in Termux. <b>Lesson:</b> Android lacks Vulkan/Mesa headers. <b>Fix:</b> Use pre-compiled ARM64 Linux binaries.</p>
                 </div>
-
-                <div class="log-item">
-                    <h3>Mistake: DNS Loopback Isolation</h3>
-                    <p class="brief"><b>The Failure:</b> The tool failed to resolve server IPs (Connection Refused). <b>The Result:</b> Termux was isolated from the Android OS network stack. <b>The Lesson:</b> We must manually inject a nameserver into the <code>$PREFIX/etc/resolv.conf</code> file to force global resolution through Google DNS (8.8.8.8).</p>
+                <div class="mistake-box">
+                    <h4>The DNS Tunnel Bug</h4>
+                    <p class="explanation">The proxy could not resolve server addresses. <b>Lesson:</b> Termux is isolated. <b>Fix:</b> Manually configure the <code>resolv.conf</code> with Google DNS (8.8.8.8).</p>
                 </div>
-
-                <div class="log-item">
-                    <h3>Mistake: SSL Certificate Verification</h3>
-                    <p class="brief"><b>The Failure:</b> Microsoft Authentication failed with "Unknown Authority". <b>The Result:</b> The tool could not verify the security handshake. <b>The Lesson:</b> Go programs in Termux don't know where Android stores its certificates. We must point the tool to <code>cert.pem</code> via the <code>SSL_CERT_FILE</code> variable.</p>
+                <div class="mistake-box">
+                    <h4>The SSL Handshake Fail</h4>
+                    <p class="explanation">Microsoft Auth failed with "Unknown Authority." <b>Lesson:</b> Go doesn't find Android certs. <b>Fix:</b> Bind the <code>SSL_CERT_FILE</code> variable via Proot.</p>
+                </div>
+                <div class="mistake-box">
+                    <h4>The Registry Panic</h4>
+                    <p class="explanation">Crashing on CraftersMC. <b>Lesson:</b> Duplicate block states (trpixel) break the Dragonfly library. <b>Result:</b> Software-level incompatibility.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Phase 2: The Master Commands -->
-        <section id="commands">
+        <section id="master-commands">
             <h2>The Master Command Protocol</h2>
-            
             <div class="card">
-                <h3>1. Environment Configuration</h3>
-                <p class="brief">This script cleans your repository, installs the proot bridge, and fixes the DNS. It is the foundation of the Elsa Getup setup.</p>
-                <div class="code-engine">
-                    <button class="copy-btn" onclick="copy(this)">COPY ENGINE</button>
+                <h3>1. Environment Lockdown</h3>
+                <p class="explanation">This command prepares your Termux environment, installs the Proot bridge, and forces DNS resolution for global connectivity.</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copy(this)">COPY SETUP</button>
                     <pre><code>pkg update && pkg upgrade -y
 pkg install wget proot ca-certificates -y
 mkdir -p $PREFIX/etc
@@ -275,83 +180,70 @@ echo "nameserver 8.8.8.8" > $PREFIX/etc/resolv.conf</code></pre>
             </div>
 
             <div class="card">
-                <h3>2. The Launch Sequence</h3>
-                <p class="brief">This uses <b>PROOT</b> to bind the file system and SSL certificates. It bypasses Android's restricted permissions to allow the tool to listen on port 19132.</p>
-                <div class="code-engine">
-                    <button class="copy-btn" onclick="copy(this)">COPY LAUNCHER</button>
-                    <pre><code>SSL_CERT_FILE=$PREFIX/etc/tls/cert.pem proot \
--b $PREFIX/etc/resolv.conf:/etc/resolv.conf \
--b $PREFIX/etc/tls/cert.pem:/etc/ssl/certs/ca-certificates.crt \
+                <h3>2. Binary Acquisition</h3>
+                <p class="explanation">Fetching the specific ARM64 architecture build required for modern Android processors.</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copy(this)">COPY BINARY</button>
+                    <pre><code>wget https://github.com/bedrock-tool/bedrocktool/releases/download/r1.55.1/bedrocktool-linux-arm64-1.55.1-0 -O bt
+chmod +x bt</code></pre>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>3. The Execution Sequence</h3>
+                <p class="explanation">The final "Master Run" command. This uses <code>proot</code> to trick the tool into thinking it's in a standard Linux OS with proper certificate paths.</p>
+                <div class="code-block">
+                    <button class="copy-btn" onclick="copy(this)">COPY MASTER RUN</button>
+                    <pre><code>SSL_CERT_FILE=$PREFIX/etc/tls/cert.pem proot \\
+-b $PREFIX/etc/resolv.conf:/etc/resolv.conf \\
+-b $PREFIX/etc/tls/cert.pem:/etc/ssl/certs/ca-certificates.crt \\
 ./bt worlds -save-entities=false</code></pre>
                 </div>
             </div>
         </section>
 
-        <!-- Phase 3: The JavaScript Logic -->
-        <section id="scripting">
-            <h2>Minion AI: JavaScript Logic</h2>
-            <div class="card">
-                <p class="brief">For the Hypixel Minion recreation in Bedrock, we use the <b>Scripting API</b>. This logic handles block detection, inventory management, and animation triggers.</p>
-                <div class="code-engine">
-                    <button class="copy-btn" onclick="copy(this)">COPY MINION API</button>
-                    <pre><code>import { world, system } from "@minecraft/server";
-
-system.runInterval(() => {
-    // Locate minions in the dimension
-    const minions = world.getDimension("overworld").getEntities({ type: "my:minion" });
-    
-    for (const minion of minions) {
-        // Detect block in view direction (max 2 blocks)
-        const block = minion.getBlockFromViewDirection({ maxDistance: 2 });
-        
-        if (block && block.typeId === "minecraft:cobblestone") {
-            // Execution logic: Clear block -> Add Score -> Play Animation
-            minion.runCommandAsync("animation @s animation.minion.mine");
-            block.setType("minecraft:air");
-            minion.runCommandAsync("scoreboard players add @s storage 1");
-        }
-    }
-}, 100); // Pulse every 5 seconds</code></pre>
+        <section id="roadmap">
+            <h2>Roadmap: What to do Next?</h2>
+            <div class="roadmap">
+                <div class="roadmap-item">
+                    <span class="highlight">Map Conversion:</span> Use the <b>Amulet Map Editor</b> on PC to convert your captured worlds into unique hubs.
                 </div>
-            </div>
-        </section>
-
-        <!-- Phase 4: Error Diagnostic Room -->
-        <section id="diagnostics">
-            <h2>The Panic Room: Registry Diagnostics</h2>
-            <div class="card" style="border: 1px solid rgba(239, 68, 68, 0.3);">
-                <p class="brief"><b>Error:</b> <code>cannot register the same state twice</code> (Go Panic)<br>
-                <b>Explanation:</b> This is a Block Registry conflict. When a server (like CraftersMC) sends duplicate custom block data, the tool's internal library (Dragonfly) crashes to prevent world corruption. This is a <b>software-level incompatibility</b> that no user command can fix until the tool is updated.</p>
+                <div class="roadmap-item">
+                    <span class="highlight">UI Development:</span> Deploy this Elsa Getup guide to <b>GitHub Pages</b> to provide a clean copy-paste resource for your subscribers.
+                </div>
+                <div class="roadmap-item">
+                    <span class="highlight">Server Modding:</span> Explore the <b>Bedrock Scripting API</b> to add custom features like shops and portals to your downloaded worlds.
+                </div>
             </div>
         </section>
 
     </div>
 
     <footer>
-        <div class="footer-brand">VINX - MCPE</div>
-        <p>Automated Developer Guide & Mastery Portal</p>
-        <p>&copy; <span id="year"></span> | Created and Maintained by VINX - MCPE</p>
+        <div class="footer-logo">VINX - MCPE</div>
+        <p>Premium Developer Documentation | Master Architect v2.0</p>
+        <p>&copy; <span id="currentYear"></span> | Created by VINX - MCPE</p>
     </footer>
 
     <script>
-        // Automatic Year Update
-        document.getElementById('year').textContent = new Date().getFullYear();
-
-        // High-Performance Copy System
+        // Copy Engine
         function copy(btn) {
             const code = btn.nextElementSibling.innerText;
             navigator.clipboard.writeText(code).then(() => {
-                const originalText = btn.innerText;
-                btn.innerText = "COPIED TO CLIPBOARD";
+                const original = btn.innerText;
+                btn.innerText = "COPIED!";
                 btn.style.background = "#0ea5e9";
-                btn.style.color = "#fff";
+                btn.style.color = "white";
                 setTimeout(() => {
-                    btn.innerText = originalText;
+                    btn.innerText = original;
                     btn.style.background = "rgba(14, 165, 233, 0.2)";
                     btn.style.color = "#0ea5e9";
-                }, 2500);
+                }, 2000);
             });
         }
+
+        // Automatic Year Engine
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
